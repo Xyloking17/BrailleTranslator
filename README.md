@@ -17,3 +17,10 @@ Initial Commit:
    numbers, and (although not implemented yet) special characters.
 
 ///////////////////////////////////////////////////////////////////////////////
+Update 1:
+
+    Well, I made the site responsive in probably the grossest way possible. You
+    have to reload the page when the window is resized, but on the surface it
+    doesn't look too bad.
+
+///////////////////////////////////////////////////////////////////////////////

@@ -3,7 +3,7 @@ var buttons = [];
 var modifiers = [];
 //array with all active braille button indexes
 var activeButtons = [];
-var cirRadius = 180;
+var cirRadius;
 var translation = ' ';
 
 
@@ -11,22 +11,28 @@ function setup() {
 		createCanvas(windowWidth, windowHeight);
 
 		noStroke();
-		textSize(500);
 		textAlign(CENTER, CENTER);
+
+		if(windowWidth >= windowHeight){
+			cirRadius = windowHeight/6;
+		} else {
+			cirRadius = windowWidth/6;
+		}
+		console.log(cirRadius);
 
 //defining main braille button positions
 		buttons = [
-			{x: width/2 - 110, y: 200, isOn: false },
-			{x: width/2 + 110, y: 200, isOn: false },
-			{x: width/2 - 110, y: 410, isOn: false },
-			{x: width/2 + 110, y: 410, isOn: false },
-			{x: width/2 - 110, y: 620, isOn: false },
-			{x: width/2 + 110, y: 620, isOn: false }
+			{x: width/2 - cirRadius/1.8, y: cirRadius, isOn: false },
+			{x: width/2 + cirRadius/1.8, y: cirRadius, isOn: false },
+			{x: width/2 - cirRadius/1.8, y: cirRadius * 2.2, isOn: false },
+			{x: width/2 + cirRadius/1.8, y: cirRadius * 2.2, isOn: false },
+			{x: width/2 - cirRadius/1.8, y: cirRadius * 3.4, isOn: false },
+			{x: width/2 + cirRadius/1.8, y: cirRadius * 3.4, isOn: false }
 		];
 //defining modifier buttons
 		modifiers = [
-			{x: width - 200, y: 200, isOn: false},
-			{x: width - 200, y: 410, isOn: false}
+			{x: width - cirRadius * .6, y: cirRadius, isOn: false},
+			{x: width - cirRadius * .6, y: cirRadius * 2.2, isOn: false}
 		]
 }
 
@@ -84,28 +90,33 @@ function draw() {
 	}
 //showing # label
 	push();
+	let cen1 = modifiers[0];
+	stroke(0);
+	strokeWeight(2);
+	fill(75);
+	ellipse(cen1.x - cirRadius/8, cen1.y - cirRadius/4, cirRadius/6);
+	ellipse(cen1.x - cirRadius/8, cen1.y, cirRadius/6);
 	fill(200);
-	ellipse(width - 370, 170, 20);
-	ellipse(width - 370, 200, 20);
-	ellipse(width - 400, 230, 20);
-	ellipse(width - 370, 230, 20);
-	fill(200, 50);
-	ellipse(width - 400, 170, 20);
-	ellipse(width - 400, 200, 20);
+	ellipse(cen1.x - cirRadius/8, cen1.y + cirRadius/4, cirRadius/6);
+	ellipse(cen1.x + cirRadius/8, cen1.y - cirRadius/4, cirRadius/6);
+	ellipse(cen1.x + cirRadius/8, cen1.y, cirRadius/6);
+	ellipse(cen1.x + cirRadius/8, cen1.y + cirRadius/4, cirRadius/6);
 
 	pop();
 
 //showing CAPS Label
 	push();
-
-	fill(200, 50);
-	ellipse(width - 370, 380, 20);
-	ellipse(width - 370, 410, 20);
-	ellipse(width - 400, 440, 20);
-	ellipse(width - 400, 380, 20);
-	ellipse(width - 400, 410, 20);
+	let cen2 = modifiers[1];
+	stroke(0);
+	strokeWeight(2);
+	fill(75);
+	ellipse(cen2.x - cirRadius/8, cen2.y - cirRadius/4, cirRadius/6);
+	ellipse(cen2.x - cirRadius/8, cen2.y, cirRadius/6);
+	ellipse(cen2.x - cirRadius/8, cen2.y + cirRadius/4, cirRadius/6);
+	ellipse(cen2.x + cirRadius/8, cen2.y - cirRadius/4, cirRadius/6);
+	ellipse(cen2.x + cirRadius/8, cen2.y, cirRadius/6);
 	fill(200);
-	ellipse(width - 370, 440, 20);
+	ellipse(cen2.x + cirRadius/8, cen2.y + cirRadius/4, cirRadius/6);
 
 
 	pop();
@@ -115,7 +126,13 @@ function draw() {
 	push();
 	strokeWeight(3);
 	fill(200);
-	text(translation, 300, windowHeight/2);
+	textSize(cirRadius * 2);
+	if(windowWidth >= windowHeight){
+		text(translation, cirRadius*1.5, windowHeight/2);
+	} else {
+		text(translation, windowWidth/2, windowHeight - cirRadius*1.5);
+	}
+
 	pop();
 
 }
